@@ -12,6 +12,8 @@ export default {
   },
   bot: {
     token: env.get('BOT_TOKEN').required().asString(),
+    apiId: env.get('BOT_API_ID').required().asInt(),
+    apiHash: env.get('BOT_API_HASH').required().asString(),
     chatId: env.get('BOT_CHAT_ID').required().asInt(),
     whitelistedIds: env.get('BOT_WHITELISTED_IDS').default('').asArray(',').map(Number),
   },
@@ -19,5 +21,9 @@ export default {
     url: env.get('PELICAN_URL').required().asString(),
     token: env.get('PELICAN_TOKEN').required().asString(),
     serverId: env.get('PELICAN_SERVER_ID').required().asString(),
+  },
+  grafana: {
+    url: env.get('GRAFANA_URL').required().asString(),
+    datasource: env.get('GRAFANA_DATASOURCE').required().asString(),
   },
 }

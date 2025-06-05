@@ -1,27 +1,25 @@
-import { join } from 'node:path'
-
-import { autoload } from '@gramio/autoload'
-import { Bot } from 'gramio'
+import { TelegramClient } from '@mtcute/node'
 
 import config from '@/shared/config.js'
 import { provideLogger } from '@/shared/utilities/logger.js'
 
-import { isWhitelisted } from './utilities/is-whitelisted.js'
+import type { PelicanService } from '../shared/services/pelican/pelican.js'
 
-export const bot = new Bot(config.bot.token)
-  .on('message', (ctx, next) => {
-    if (!isWhitelisted(ctx.chatId)) {
-      return ctx.send('You are not allowed to use this bot')
-    }
+const logger = provideLogger('bot')
 
-    return next()
-  })
-  .extend(autoload({
-    path: join(import.meta.dirname, 'commands'),
-  }))
+declare module '@mtcute/dispatcher' {
+  interface DispatcherDependencies {
+    pelican: PelicanService
+  }
+}
 
-bot.onStart(({ info }) => {
-  provideLogger('bot').info(`bot started as @${info.username}`)
+export const bot = new TelegramClient({
+  storage: '.runtime/session',
+  apiId: config.bot.apiId,
+  apiHash: config.bot.apiHash,
 })
 
-export type BotType = typeof bot
+const LEVELS = ['debug', 'info', 'warn', 'error', 'fatal']
+bot.log.mgr.handler = (color: number, level: number, tag: string, fmt: string, args: unknown[]) => {
+  logger.log(LEVELS[level], `[${tag}] ${fmt}`, ...args)
+}

@@ -1,6 +1,7 @@
 export interface PelicanOptions {
   url: string
   token: string
+  serverId: string
 }
 
 export interface PelicanResponse<T> {

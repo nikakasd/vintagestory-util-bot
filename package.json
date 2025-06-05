@@ -36,10 +36,15 @@
   },
   "dependencies": {
     "@fuman/fetch": "^0.1.0",
-    "@gramio/autoload": "^1.1.0",
+    "@fuman/net": "^0.0.14",
+    "@fuman/utils": "^0.0.14",
+    "@mtcute/dispatcher": "^0.24.2",
+    "@mtcute/node": "^0.24.0",
     "cross-env": "^7.0.3",
     "env-var": "^7.5.0",
-    "gramio": "^0.4.7",
     "winston": "^3.17.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["better-sqlite3"]
   }
 }
