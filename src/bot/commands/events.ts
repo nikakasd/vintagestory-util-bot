@@ -17,10 +17,6 @@ export default (client: TelegramClient, dp: Dispatcher) => {
       return
     }
 
-    if ((m = line.match(/\[Server Chat\] 0 \| (.+?): (.+)$/i))) {
-      client.sendText(config.bot.chatId, html`<b>${m[1]}</b>: ${m[2]}`)
-    }
-
     if (
       (m = line.match(/\[Server Notification\] Message to all in group 0: (A .+? temporal storm is (?:approaching|imminent))$/i)) ||
       (m = line.match(/\[Server Notification\] Message to all in group 0: (The temporal storm seems to be waning)/i))

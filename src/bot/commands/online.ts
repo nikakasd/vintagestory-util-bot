@@ -2,7 +2,6 @@ import type { Dispatcher } from '@mtcute/dispatcher'
 import { filters } from '@mtcute/dispatcher'
 import { html, type Message, type TelegramClient } from '@mtcute/node'
 
-import config from '../../shared/config.js'
 import { isWhitelisted } from '../utilities/is-whitelisted.js'
 
 export default (client: TelegramClient, dp: Dispatcher) => {
