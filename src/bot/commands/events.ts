@@ -17,7 +17,7 @@ export default (client: TelegramClient, dp: Dispatcher) => {
       return
     }
 
-    if ((m = line.match(/\[Server Chat\] \d+ \| (.+?): (.+)$/i))) {
+    if ((m = line.match(/\[Server Chat\] 0 \| (.+?): (.+)$/i))) {
       client.sendText(config.bot.chatId, html`<b>${m[1]}</b>: ${m[2]}`)
     }
   })
