@@ -20,10 +20,4 @@ export default {
     token: env.get('PELICAN_TOKEN').required().asString(),
     serverId: env.get('PELICAN_SERVER_ID').required().asString(),
   },
-  redis: {
-    host: env.get('REDIS_HOST').required().asString(),
-    port: env.get('REDIS_PORT').required().asInt(),
-    password: env.get('REDIS_PASSWORD').default('').asString(),
-    db: env.get('REDIS_DB').default(0).asInt(),
-  },
 }

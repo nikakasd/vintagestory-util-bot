@@ -40,8 +40,6 @@
     "cross-env": "^7.0.3",
     "env-var": "^7.5.0",
     "gramio": "^0.4.7",
-    "ioredis": "^5.6.1",
-    "jobify": "^0.1.6",
     "winston": "^3.17.0"
   }
 }
