@@ -22,7 +22,7 @@ const init = async () => {
   dp.inject('pelican', pelican)
 
   // load commands
-  for (const file of await readdir(new URL('./bot/commands', import.meta.url))) {
+  for (const file of await readdir(new URL('./bot/commands', import.meta.url)).then((files) => files.filter((file) => !file.endsWith('.map')))) {
     const command = await import(`./bot/commands/${file}`)
     command.default(bot, dp)
   }
