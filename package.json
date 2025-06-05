@@ -1,0 +1,47 @@
+{
+  "name": "vintagestory-util-bot",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "A utility Telegram bot for Vintage Story server players",
+  "main": "./src/index.js",
+  "author": {
+    "name": "nikakasd",
+    "url": "https://github.com/nikakasd"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977",
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "dev": "cross-env NODE_ENV=development tsx ./src/index.ts",
+    "lint": "eslint -c eslint.config.mjs .",
+    "prepare": "husky || true",
+    "start": "cross-env NODE_ENV=production node ./dist/index.js",
+    "commitlint": "commitlint --edit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@types/node": "^22.15.19",
+    "eslint": "^9.27.0",
+    "eslint-plugin-perfectionist": "^4.13.0",
+    "globals": "^15.15.0",
+    "husky": "^9.1.7",
+    "neostandard": "^0.12.1",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1"
+  },
+  "dependencies": {
+    "@fuman/fetch": "^0.1.0",
+    "@gramio/autoload": "^1.1.0",
+    "cross-env": "^7.0.3",
+    "env-var": "^7.5.0",
+    "gramio": "^0.4.7",
+    "ioredis": "^5.6.1",
+    "jobify": "^0.1.6",
+    "winston": "^3.17.0"
+  }
+}
