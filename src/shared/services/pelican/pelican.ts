@@ -56,6 +56,17 @@ export class PelicanService {
       if (frame.event === 'console output') {
         this.onConsole.emit(frame.args[0])
       }
+
+      if (frame.event === 'token expiring') {
+        const res = await this.#fetch.get(`/servers/${this.options.serverId}/websocket`).json<PelicanResponse<PelicanServerWebsocketResponse>>()
+
+        this.#websocketToken = res.data.token
+
+        await conn.writeFrame(JSON.stringify({
+          event: 'auth',
+          args: [this.#websocketToken],
+        }))
+      }
     }
   }
 
