@@ -11,7 +11,14 @@ export default (client: TelegramClient, dp: Dispatcher) => {
     if (!text || text[0] === '/') return
 
     await dp.deps.pelican.sendCommand(`[on behalf of ${ctx.sender.username ?? ctx.sender.displayName}] ${text}`)
+      .then(() => {
+        ctx.react({ emoji: '✍' }).then(() => {
+          setTimeout(() => ctx.react({ emoji: null }), 3000)
+        }).catch(() => {})
+      })
+      .catch(() => ctx.react({ emoji: '😡' }).catch(() => {}))
   })
+
   dp.deps.pelican.onConsole.add((line) => {
     let m
     if ((m = line.match(/\[Server Chat\] 0 \| (.+?): (.+)$/i))) {
