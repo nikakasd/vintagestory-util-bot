@@ -4,6 +4,8 @@ import type { WebSocketConnectionFramed } from '@fuman/net'
 import { connectWsFramed, PersistentConnection } from '@fuman/net'
 import { asNonNull, Deferred, Emitter } from '@fuman/utils'
 
+import { provideLogger } from '@/shared/utilities/logger.js'
+
 import type { PelicanOptions, PelicanResponse, PelicanServerWebsocketResponse, PelicanWebsocketMessage } from './types.js'
 
 export class PelicanService {
@@ -34,7 +36,12 @@ export class PelicanService {
         return connectWsFramed({ url: res.data.socket })
       },
       onOpen: this.#onOpen.bind(this),
+      onClose: this.#onClose.bind(this),
     })
+  }
+
+  #onClose () {
+    provideLogger('pelican').error('Websocket connection closed')
   }
 
   async #onOpen (conn: WebSocketConnectionFramed) {
@@ -57,7 +64,7 @@ export class PelicanService {
         this.onConsole.emit(frame.args[0])
       }
 
-      if (frame.event === 'token expiring') {
+      if (['token expired', 'token expiring'].includes(frame.event)) {
         const res = await this.#fetch.get(`/servers/${this.options.serverId}/websocket`).json<PelicanResponse<PelicanServerWebsocketResponse>>()
 
         this.#websocketToken = res.data.token
